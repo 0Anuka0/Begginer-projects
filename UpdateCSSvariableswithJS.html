@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    
+    :root {
+        --spacing:20px;
+        --color:orange;
+        --size:20px;
+    }
+        body {
+            margin:0;
+            padding:0;
+            background-color:rgba(255, 166, 0, 0.545);
+            height:100vh;
+            width:100%;
+            display: inline-block;
+            overflow: hidden;
+
+        }
+
+        .box {
+            padding:var(--spacing);
+            background-color:var(--color);
+        }
+
+        p {
+            font-size:var(--size);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="box">
+        <label for="spacing">Spacing</label>
+        <input type="range" name="spacing" val="20"  data-suffix ="px">
+
+        <label for="color">Color</label>
+        <input type="color" name="color">
+
+        <label for="size">Size</label>
+        <input type="range" val="20" name="size" max="100" min="20" data-suffix="px">
+
+<p>THIS IS MESTIA</p>
+        <img src="images/mestia.jpg" alt="" width="500px">
+    </div>
+    
+    <script>
+let inputs = document.querySelectorAll("input");
+
+inputs.forEach(input=>input.addEventListener("change", update))
+
+function update(){
+
+let suffix = this.dataset.suffix || "";
+console.log(suffix);
+    document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+}
+
+    </script>
+</body>
+</html>l
