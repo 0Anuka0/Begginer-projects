@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+:root {
+    --Color:rgb(180, 66, 66);
+}
+
+body {
+    height: 100vh;
+    overflow: hidden;
+    background-image:linear-gradient(var(--Color), pink 45%, white 50%, pink 55%, var(--Color));
+    background-attachment:fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box {
+border:solid 2px var(--Color);
+width:100px;
+height:100px;
+margin:3vw;
+display: flex;
+justify-content: center;
+align-items: center;
+font-size:30px;
+color:var(--Color);
+transition:0.3s;
+transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.coloring {
+    position:absolute;
+    top:80%;
+    font-size: 30px;
+    color:var(--Color);
+    font-weight: 1000;
+    text-shadow: 1px 0.4px white;
+}
+h1 {
+
+    position:absolute;
+    top:20%;
+    color:white;
+
+
+}
+
+    </style>
+</head>
+<body>
+<h1>Press key H to hear HELLO, press key N to hear Laugh and press Key M to hear ROCK SOUNDS</h1>
+<div class="box" name="72"></div>
+<div class="box" name="78"></div>
+<div class="box" name="77"></div>
+
+<audio src="audios/054256_hello-hello-hello-87673.mp3" data-name="72"></audio>
+<audio src="audios/laught.mp3" data-name="78"></audio>
+<audio src="audios/sport-rock-logo4-13779.mp3" data-name="77"></audio>
+
+<div class="coloring">
+    <label for="coloring">coloring: </label>
+    <input type="color" name="coloring" value="#e66465">
+</div>
+
+<script>
+const boxNames = ["KeyH", "KeyN", "KeyM"];
+
+const boxes = document.querySelectorAll(".box");
+console.log(boxes);
+for(let i=0; i<boxNames.length; i++){
+    boxes[i].innerText = boxNames[i];
+}
+
+const coloring = document.querySelector("input");
+coloring.addEventListener("change", changeColor);
+
+function changeColor () {
+    document.documentElement.style.setProperty("--Color", this.value);
+}
+
+function press(e) {
+
+    console.log(e.keyCode);
+    let audio =document.querySelector(`audio[data-name="${e.keyCode}"]`)
+    console.log(audio);
+
+    if(!audio)return;
+    audio.play();
+    audio.currentTime=0;
+
+ let box = document.querySelector(`div[name="${e.keyCode}"]`);
+ console.log(box);
+    box.style.boxShadow="0px 0px 60px white, 0 0 7px white";
+    box.style.textShadow="2px 2px 2px white";
+    box.style.transform="rotate(180deg)";
+}
+
+function keyUp(e){
+    let box = document.querySelector(`div[name="${e.keyCode}"]`);
+ console.log(box);
+    box.style.boxShadow="none";
+    box.style.textShadow="none";
+    box.style.transform="none";
+};
+
+
+window.addEventListener("keydown", press);
+window.addEventListener("keyup", keyUp);
+
+
+
+
+    </script>
+</body>
+</html>
