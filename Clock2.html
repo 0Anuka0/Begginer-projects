@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+    <style>
+body {
+margin:0;
+padding:0;
+width:100vw;
+height:100vh;
+background-image:linear-gradient(to right, rgb(95, 95, 216) 1%, rgb(173, 188, 230) 90%);
+display:flex;
+justify-content: center;
+align-items:center;
+}
+
+.clock {
+    position:relative;
+    width:240px;
+    height:240px;
+    border:solid 25px white; 
+    border-radius: 50%; 
+}
+
+.stickHr {
+position:absolute;
+top:50px;
+left:119.7px;
+width:6px;
+height: 70px;
+background-color:black;
+transform-origin: bottom;
+border-radius: 10px;
+
+}
+
+.stickMin {
+position:absolute;
+top:40px;
+width:6px;
+height: 80px;
+left:120px;
+background-color:black; 
+transform-origin: bottom;
+border-radius: 10px;
+}
+
+.stickSeconds {
+position:absolute;
+top:20px;
+width:6px;
+height: 100px;
+left:120.7px;
+background-color:black; 
+transform-origin: bottom;
+border-radius: 10px;
+}
+
+.showhours {
+position:absolute;
+width:3px;
+height: 10px;
+background-color:black;
+ }
+
+ .one {
+transform: rotate(45deg);
+top:18px;
+left:180px;
+ }
+
+ .two {
+transform: rotate(45deg);
+top:18px;
+left:180px;
+ }
+
+ .twelve {
+top:0px;
+left:122.3px;
+ }
+
+ .three {
+transform:rotate(90deg);
+top:117px;
+left:233.5px;
+ }
+
+
+
+    </style>
+</head>
+<body>
+
+    <div class="clock">
+
+        <div class="stickHr"></div>
+        <div class="stickMin"></div>
+        <div class="stickSeconds"></div>
+        <div class="showhours twelve"></div>
+        <div class="showhours one"></div>
+        <div class="showhours two"></div>
+        <div class="showhours three"></div>
+    </div>
+
+    <script>
+
+let now;
+
+let hour; 
+let min ;
+let seconds;
+
+let stickSeconds = document.querySelector(".stickSeconds");
+let stickHr = document.querySelector(".stickHr");
+let stickMin =document.querySelector(".stickMin"); 
+setInterval(func, 1000);
+
+
+let secondsCount;
+function func (){
+now  = new Date();
+hour = now.getHours();
+min  = now.getMinutes();
+seconds = now.getSeconds();
+console.log(hour, min, seconds);
+
+
+stickSeconds.style.transform = `rotate(${seconds*6}deg)`;
+stickHr.style.transform = `rotate(${(hour*30)+(min*1/2)}deg)`;
+stickMin.style.transform = `rotate(${min*6}deg)`;
+}
+
+    </script>
+</body>
+</html>
