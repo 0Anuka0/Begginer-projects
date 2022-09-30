@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        body {
+height: 100vh;
+box-sizing: border-box;
+margin:0;
+padding:0;
+display: flex;
+justify-content: center;
+align-items: center;
+overflow: hidden;
+
+
+        }
+
+      .hero {
+        position:relative;
+        box-sizing: border-box;
+        padding:0;
+        display: flex;
+        background-color: blue;
+        align-items: center;
+        justify-content: center;
+        width:500px;
+        height:500px;
+        border-radius: 100px;
+      }
+
+      p {
+        border-radius: 40px;
+        padding:700px;
+        position:absolute;
+        text-align: center;
+        text-shadow: 3px 3px 0 #ffff00;
+        font-size:60px;
+        background-color: rgba(238, 130, 238, 0.668);
+      } 
+
+    </style>
+</head>
+<body>
+    
+    <div class="hero">
+        <p> WoW!</p>
+    </div>
+
+    <script>
+const hero = document.querySelector(".hero");
+const text = hero.querySelector("p");
+const walk = 100; //100px;
+
+function shadow(e){
+const {offsetWidth:width, offsetHeight:height}=hero;
+
+//but when you hover in this you will get the x,y of the h1 element and it will be small numebrs 
+let { offsetX:x, offsetY:y} = e;
+//to fix this e.target is an event that is actually triggered on while this is the event that is listened to where you put addEventslistener. if those things are not the same we write 
+console.log(e.offsetY, "offsetY");
+console.log(e.target.offsetTop, "offsetTOP E");
+if(this != e.target) {
+    //offsetTop property returns the top position (in pixels) relative to the parent. the returned value includes the top position, and margin of the element. the padding, scrollbar and border of the parent. 
+    console.log("offsetTop", e.target.offsetTop);
+    console.log( "offsetY", e.offsetY);
+
+x = x + e.target.offsetLeft;
+
+y = y + e.target.offsetTop;
+}
+
+const xWalk = (x/width*walk) -(walk/2)
+const yWalk=(y/height*walk)-(walk/2);
+
+text.style.textShadow = `${xWalk}px ${yWalk}px 0 rgba(238, 130, 238, 0.668),
+${-xWalk}px ${yWalk}px 0 rgba(238, 330, 238, 0.668),
+${xWalk}px ${-yWalk}px 0 rgba(238, 230, 238, 0.668),
+${-xWalk}px ${-yWalk}px 0 rgba(238, 130, 238, 0.968)
+` 
+}
+
+hero.addEventListener("mousemove", shadow);
+
+    </script>
+</body>
+</html>
