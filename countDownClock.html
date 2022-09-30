@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+* {
+box-sizing: border-box;
+        }
+body {
+margin:0;
+padding:0;
+width:100%;
+height:100vh;
+background-image:linear-gradient(45deg, rgb(62, 123, 245), rgb(90, 121, 222), rgb(155, 187, 243));
+}
+body::-webkit-scrollbar {
+    display:none;
+}
+
+.nav {
+    width:100%;
+    height:40px;
+    border:white solid 2px;
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    align-items: center;
+    text-align: center;
+}
+
+.nav div {
+flex:1;
+display: flex;
+align-items: center;
+justify-content: center;
+border:solid white 2px;
+height:40px;
+color:white;
+font-weight: bold;
+text-shadow:2px 2px rgba(75, 116, 212, 0.778)
+}
+
+.nav div:hover {
+    background-color: rgba(240, 248, 255, 0.541);
+    transition: all 0.5s;
+}
+
+.Timer {
+    color:white;
+    font-size:80px;
+    font-family:cursive;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    height:80vh;
+}
+
+input {
+    height:40px;
+    border:solid 2px white;
+    background-color: rgba(240, 248, 255, 0.338);
+    color:white;
+    font-size:17px;
+    text-align: center;
+
+}
+
+input:active {
+    border: solid 2px white;
+}
+    </style>
+</head>
+<body>
+<div class="nav">
+<div onclick="timer(20)">20 SECS</div>
+<div onclick="timer(5*60)">WORK 5</div>
+<div onclick="timer(15*60)">QUICK 15</div>
+<div onclick="timer(20*60)">SNACK 20</div>
+<div>LUNCH BREAK</div>
+<form name="customForm" >
+    <input type="number" placeholder="Enter text" name="valueInput" >
+</form>
+
+</div>    
+    
+<div class="Timer">
+<h1 class="time"></h1>
+</div>
+
+    <script>
+let timeDisplay = document.querySelector(".time");
+let countdown;
+//form has this possibiloity to select documents immediately from its name not input but form name;
+ 
+//you can submit actually only on the form, now without a form
+
+document.customForm.addEventListener("submit", function(e){
+    e.preventDefault();
+    console.log("hello");
+    let minutes = Number(this.valueInput.value);
+    timer(minutes*60);
+});
+
+function timer(seconds){
+    //clear any existing timers
+    clearInterval(countdown);
+const now = Date.now();
+const then = now + seconds*1000;
+displayTime(seconds);
+
+countdown = setInterval(()=> {
+let secondsLeft = Math.round((then - Date.now())/1000);
+
+if(secondsLeft < 0){
+    clearInterval(countdown);
+    return;
+}
+displayTime(secondsLeft);
+
+}, 1000);
+
+};
+
+
+
+function displayTime(seconds){
+let minutes = Math.floor(seconds/60);
+let secs = seconds%60; 
+
+let timetoDisplay = `${minutes<10?"0":""}${minutes}:${secs < 10 ? "0":""}${secs}`;
+timeDisplay.textContent = timetoDisplay;
+document.title = timetoDisplay;
+
+}
+
+
+
+
+    </script>
+
+</body>
+</html>
